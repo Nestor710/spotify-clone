@@ -1,4 +1,4 @@
-import { usePlayerStore } from '@/store/playerStore';
+import { usePlayerStore } from '../store/playerStore';
 import { useEffect, useRef } from 'react';
 import SongControl from './SongControl';
 import VolumeControl from './VolumeControl';

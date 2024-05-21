@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "/home/nestor/projects/ASTRO/spotify-clone",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "src/*"

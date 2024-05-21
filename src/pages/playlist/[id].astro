@@ -1,13 +1,13 @@
 ---
-import ItemsList from '@/components/ItemsList.astro'
-import { allPlaylists, songs } from '@/lib/data';
-import Layout from '@/layouts/Layout.astro';
-import { CardPlayButton } from '@/components/playerControl/CardPlayButton';
+import ItemsList from '../../components/ItemsList.astro'
+import { allPlaylists, songs, type Playlist, type Song } from '../../lib/data';
+import Layout from '../../layouts/Layout.astro';
+import { CardPlayButton } from '../../components/playerControl/CardPlayButton';
 
 const { id } = Astro.params;
 
-const playlist = allPlaylists.find(playlist => playlist.id === id)
-const playListSongs = songs.filter(song => song.albumId === playlist?.albumId)
+const playlist = allPlaylists.find((playlist: Playlist) => playlist.id === id)
+const playListSongs = songs.filter((song: Song) => song.albumId === playlist?.albumId)
 
 ---
 
