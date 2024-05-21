@@ -1,0 +1,82 @@
+---
+import ItemsList from '@/components/ItemsList.astro'
+import { allPlaylists, songs } from '@/lib/data';
+import Layout from '@/layouts/Layout.astro';
+import { CardPlayButton } from '@/components/playerControl/CardPlayButton';
+
+const { id } = Astro.params;
+
+const playlist = allPlaylists.find(playlist => playlist.id === id)
+const playListSongs = songs.filter(song => song.albumId === playlist?.albumId)
+
+---
+
+<Layout title="Spotify Clone">
+	<div 
+	  id="playlist-container"
+	  class="relative flex flex-col h-full transition-all duration-1000 bg-green-600 rounded-lg m-1"
+      transition:name=`playlist ${id} box`
+	  >
+
+        <header class="flex flex-row gap-8 px-6 mt-5 mb-10">
+            <picture class="aspect-square h-52 w-52 flex-none">
+                <img 
+                  src={playlist?.cover}
+                  alt={`Cover of ${playlist?.title}`}
+                  class="object-cover w-full h-full rounded-md shadow-lg"
+                  transition:name=`playlist ${playlist?.id} image`
+                >
+            </picture>
+
+            <div class="flex flex-col justify-between">
+                <h2 class="flex flex-1 items-end">Playlist</h2>
+                <div>
+                    <h1 class="text-5xl font-bold block text-white">{playlist?.title}</h1>
+                    <span transition:name=`playlist ${playlist?.id} title`></span>
+                </div>
+
+                <div class="flex-1 flex items-end">
+                    <div class="text-sm text-gray-300 font-normal">
+                        <div transition:name=`playlist ${playlist?.id} artists`>
+                            <span>{playlist?.artists.join(", ")}</span>
+                        </div>
+                        <p class="mt-1">
+                            <span class="text-white">{ playListSongs.length } Canciones</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="pl-6">
+            <CardPlayButton id={playlist?.id} size="large" client:load/>
+        </div>
+
+        <section class="px-6 pt-10 mt-5">
+            <ItemsList songs={playListSongs}/>
+        </section>
+        <div class="opacity-50 bg-[#121212] absolute -z-10 w-full h-[70%] bottom-10"></div>
+		<div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 -z-10"></div>
+	</div>
+</Layout>
+<style>
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: orange;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 3px solid orange;
+}
+</style>
