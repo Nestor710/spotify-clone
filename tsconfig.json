@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": "/home/nestor/projects/ASTRO/spotify-clone",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@/components": [
+        "src/components/*"
+      ],
+      "@/layouts": [
+        "src/layouts/*"
+      ],
+      "@/icons": [
+        "src/icons/*"
+      ],
+      "@/lib": [
+        "src/lib/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "extends": "astro/tsconfigs/strict"
+}
